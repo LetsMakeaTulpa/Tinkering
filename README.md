@@ -1,5 +1,10 @@
 # Tinkering
 
+Two projects live here:
+
+- **Featherless Chat** (below): a chat app for your Featherless models, installable on Android.
+- **[Research OS](research-os/README.md)**: a project-based research workspace with multi-provider search (including SearXNG and Tor onion search), an archive of every source, cited reports and multi-agent workflows.
+
 ## Featherless Chat
 
 A self-hosted ChatGPT/Claude-style chat app for your [featherless.ai](https://featherless.ai) models. It installs on Android as an app (PWA) and keeps your chats on your own server, so your phone and computer see the same history.

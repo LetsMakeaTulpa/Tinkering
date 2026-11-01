@@ -1,0 +1,11 @@
+fastapi>=0.115
+uvicorn[standard]>=0.30
+sqlalchemy>=2.0
+psycopg[binary]>=3.2
+httpx[socks]>=0.27
+trafilatura>=1.12
+pypdf>=4.0
+pyyaml>=6.0
+# tests
+pytest>=8.0
+respx>=0.21
