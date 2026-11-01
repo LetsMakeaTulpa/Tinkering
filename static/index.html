@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <meta name="theme-color" content="#11131a">
+  <title>Featherless Chat</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/static/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/static/icons/icon-192.png">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" id="hljs-theme" href="/static/vendor/hljs-dark.css">
+  <style id="custom-css"></style>
+</head>
+<body>
+  <!-- login -->
+  <div id="login" class="login hidden">
+    <form id="login-form" class="card">
+      <h1>Featherless Chat</h1>
+      <input id="login-pw" type="password" placeholder="Password" autocomplete="current-password" autofocus>
+      <button class="btn primary" type="submit">Unlock</button>
+      <p id="login-err" class="err"></p>
+    </form>
+  </div>
+
+  <div id="app" class="app hidden">
+    <aside id="sidebar" class="sidebar">
+      <div class="side-top">
+        <button id="new-chat" class="btn primary block">＋ New chat</button>
+        <input id="search" type="search" placeholder="Search chats…">
+        <div class="tabs">
+          <button class="tab active" data-tab="chats">Chats</button>
+          <button class="tab" data-tab="archived">Archived</button>
+          <button class="tab" data-tab="presets">Presets</button>
+        </div>
+      </div>
+      <div id="chat-list" class="chat-list"></div>
+      <div class="side-bottom">
+        <button id="open-settings" class="btn ghost block">⚙︎ Settings</button>
+      </div>
+    </aside>
+    <div id="scrim" class="scrim"></div>
+
+    <main class="main">
+      <header class="topbar">
+        <button id="toggle-sidebar" class="icon-btn" title="Menu">☰</button>
+        <button id="model-btn" class="model-btn" title="Choose model"><span id="model-name">Choose a model</span> ▾</button>
+        <div class="spacer"></div>
+        <button id="chat-settings-btn" class="icon-btn" title="Chat settings (system prompt, sampling)">⚙︎</button>
+        <button id="chat-menu-btn" class="icon-btn" title="Chat actions">⋯</button>
+      </header>
+
+      <section id="messages" class="messages">
+        <div id="empty" class="empty">
+          <h2 id="empty-title">How can I help?</h2>
+          <p class="muted" id="empty-sub">Pick a model, attach files, and start chatting.</p>
+          <div id="empty-presets" class="preset-chips"></div>
+        </div>
+      </section>
+
+      <footer class="composer-wrap">
+        <div id="drop-hint" class="drop-hint hidden">Drop files to attach</div>
+        <div id="attachments" class="attachments"></div>
+        <div class="composer">
+          <button id="attach-btn" class="icon-btn" title="Attach files">📎</button>
+          <input id="file-input" type="file" multiple hidden>
+          <textarea id="input" rows="1" placeholder="Message…"></textarea>
+          <button id="send-btn" class="send-btn" title="Send">➤</button>
+        </div>
+        <div class="composer-meta muted"><span id="status"></span></div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- generic modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <div class="modal-head"><h3 id="modal-title"></h3><button id="modal-close" class="icon-btn">✕</button></div>
+      <div id="modal-body" class="modal-body"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+  <div id="menu" class="popmenu hidden"></div>
+
+  <script src="/static/vendor/marked.min.js"></script>
+  <script src="/static/vendor/purify.min.js"></script>
+  <script src="/static/vendor/highlight.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

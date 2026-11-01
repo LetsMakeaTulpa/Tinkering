@@ -1,0 +1,47 @@
+/* Layout: left rail of tabs, main pane. Quiet ink-on-paper palette with one signal colour for provenance. */
+:root {
+  --bg: #f6f5f1; --panel: #ffffff; --ink: #1d1f24; --muted: #6a6f7a; --line: #e2e0d8;
+  --signal: #0f766e; --signal-soft: #e3f1ef; --warn: #b45309; --bad: #b91c1c;
+  --font: "IBM Plex Sans", system-ui, sans-serif; --mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #121417; --panel: #1a1d22; --ink: #e6e8ec; --muted: #9aa1ad; --line: #2b2f37;
+          --signal: #2dd4bf; --signal-soft: #12302d; --warn: #f59e0b; --bad: #f87171; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.55 var(--font); }
+a { color: var(--signal); }
+button, input, textarea, select { font: inherit; color: inherit; }
+input, textarea, select { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; width: 100%; }
+textarea { font-family: var(--mono); font-size: 13px; }
+button { border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 7px 14px; cursor: pointer; }
+button.primary { background: var(--signal); border-color: var(--signal); color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 24px 16px; }
+.shell { display: grid; grid-template-columns: 200px 1fr; min-height: 100vh; }
+.rail { border-right: 1px solid var(--line); padding: 16px 10px; display: flex; flex-direction: column; gap: 4px; }
+.rail h1 { font-size: 15px; margin: 0 6px 14px; }
+.rail button { text-align: left; border: 0; background: none; }
+.rail button.on { background: var(--signal-soft); color: var(--signal); font-weight: 600; }
+.pane { padding: 24px; min-width: 0; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.stack { display: flex; flex-direction: column; gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+.muted { color: var(--muted); font-size: 13px; }
+.mono { font-family: var(--mono); font-size: 12px; }
+.chip { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 999px; background: var(--signal-soft); color: var(--signal); margin-right: 4px; }
+.chip.warn { background: transparent; border: 1px solid var(--warn); color: var(--warn); }
+.err { color: var(--bad); }
+.steps { display: flex; gap: 6px; flex-wrap: wrap; }
+.step { font-size: 12px; padding: 3px 9px; border-radius: 6px; border: 1px solid var(--line); }
+.step.done { border-color: var(--signal); color: var(--signal); }
+.step.running { border-color: var(--warn); color: var(--warn); }
+.step.failed { border-color: var(--bad); color: var(--bad); }
+.split { display: grid; grid-template-columns: 300px 1fr; gap: 16px; }
+.list { display: flex; flex-direction: column; gap: 2px; max-height: 75vh; overflow: auto; }
+.list button { text-align: left; border: 0; background: none; padding: 6px 8px; border-radius: 6px; }
+.list button.on { background: var(--signal-soft); }
+.md table { border-collapse: collapse; } .md td, .md th { border: 1px solid var(--line); padding: 4px 8px; }
+.md pre { overflow-x: auto; background: var(--bg); padding: 10px; border-radius: 8px; }
+pre.diff { white-space: pre-wrap; font-family: var(--mono); font-size: 12px; }
+@media (max-width: 800px) { .shell { grid-template-columns: 1fr; } .rail { flex-direction: row; overflow-x: auto; border-right: 0; border-bottom: 1px solid var(--line); } .split { grid-template-columns: 1fr; } }

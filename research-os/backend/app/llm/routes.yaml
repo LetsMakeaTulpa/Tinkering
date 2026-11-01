@@ -1,0 +1,16 @@
+# Which model handles which kind of task. The router tries each entry in order and falls back on errors.
+# Format: "<provider>:<model id>". Providers: featherless, openrouter, openai, ollama, anthropic.
+#
+# XORTRON RICO v3 (chat) and XORTRON-AgentRICO (agent) are Hugging Face models by darkc0de. Featherless serves
+# most popular Hugging Face models, but check these IDs on featherless.ai/models before relying on them.
+default:
+  - featherless:darkc0de/XORTRON-RICO-v3
+routes:
+  plan:        [featherless:darkc0de/XORTRON-AgentRICO, featherless:darkc0de/XORTRON-RICO-v3]
+  research:    [featherless:darkc0de/XORTRON-AgentRICO, featherless:darkc0de/XORTRON-RICO-v3]
+  synthesis:   [featherless:darkc0de/XORTRON-RICO-v3]
+  writing:     [featherless:darkc0de/XORTRON-RICO-v3]
+  extraction:  [featherless:darkc0de/XORTRON-RICO-v3]
+  validation:  [featherless:darkc0de/XORTRON-RICO-v3]
+  classify:    [featherless:darkc0de/XORTRON-RICO-v3]
+  coding:      [featherless:darkc0de/XORTRON-RICO-v3]

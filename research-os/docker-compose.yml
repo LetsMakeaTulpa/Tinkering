@@ -1,0 +1,50 @@
+# Everything needed to run Research OS on one machine:  docker compose up --build
+# Then open http://localhost:3000 and sign in with ADMIN_TOKEN from your .env file.
+services:
+  db:
+    image: pgvector/pgvector:pg16      # Postgres with pgvector, ready for phase 2 semantic search
+    environment:
+      POSTGRES_USER: research
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-research}
+      POSTGRES_DB: research
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U research"]
+      interval: 5s
+      retries: 10
+
+  tor:
+    image: osminogin/tor-simple        # SOCKS proxy on :9050 for .onion search and fetch
+    restart: unless-stopped
+
+  searxng:
+    image: searxng/searxng:latest
+    environment:
+      SEARXNG_SECRET: ${SEARXNG_SECRET:-change-me-please}
+    volumes: [./searxng/settings.yml:/etc/searxng/settings.yml:ro]
+    depends_on: [tor]
+    restart: unless-stopped
+
+  api:
+    build: ./backend
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql+psycopg://research:${POSTGRES_PASSWORD:-research}@db:5432/research
+      SEARXNG_URL: http://searxng:8080
+      TOR_PROXY: socks5h://tor:9050
+      CORS_ORIGINS: ${PUBLIC_WEB_URL:-http://localhost:3000}
+    depends_on:
+      db: { condition: service_healthy }
+      searxng: { condition: service_started }
+    ports: ["8000:8000"]
+
+  web:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_URL: ${PUBLIC_API_URL:-http://localhost:8000/api}
+    depends_on: [api]
+    ports: ["3000:3000"]
+
+volumes:
+  pgdata:
