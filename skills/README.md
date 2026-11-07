@@ -19,6 +19,12 @@ conditions explicitly.
 | `svg-graphics` | Authoring and rendering SVG icons, diagrams, and illustrations |
 | `chart-dataviz` | Charts from data (matplotlib) and structure diagrams (Mermaid) |
 | `ui-visual-review` | Screenshot capture, visual inspection, and screenshot diffing |
+| `image-prompt-engineering` | Prompt craft: subject/scene/style/lighting/camera structure, iteration discipline |
+| `image-edit-pipeline` | Multi-step edit chains: outpaint, background swap, erase, enhance, upscale |
+| `huggingface-image-gen` | Free no-key generation via Hugging Face Spaces (FLUX, SDXL, RMBG, Real-ESRGAN) |
+
+The last three are also published to the Mistral skill registry (workspace skills
+`image-prompt-engineering`, `image-edit-pipeline`, `huggingface-image-gen`).
 
 ## Adding a skill
 
